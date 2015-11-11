@@ -23,6 +23,7 @@ public class RoutingFacade implements Facade {
 
 	public RoutingFacade() {
 		// 1. Prüfe, wann der letzte Lauf war
+
 		// 2. lese alle Änderungen nach dem letzten Lauf
 		// 3. erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
