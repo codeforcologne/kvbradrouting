@@ -19,3 +19,5 @@ Zum Routing wird die Software graphhopper verwendet.
 ### Tests mit Datenbank
 
 Da zur Zeit keine Integration Test Stage zur Verfügung steht, sind alle Tests, die eineDatenbank voraussetzt als main codiert. Um eine Datenbankverbindung hierfür zur Verfügung stellen zu können, muss die Datei src/test/resources/jndi.properties.template in src/test/resources/jndi.properties kopiert und die entsprechenden Parameter zur Datenbank gesetzt werden.
+
+Weiterhin muss die ConnectionFactory für die Verwendung im Test-Betrieb konfiguriert werden.
