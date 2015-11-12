@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -30,15 +31,74 @@ public class Service {
 	@Context
 	private HttpServletResponse response;
 
+	/**
+	 * <p>
+	 * Beispiel: <a
+	 * href="http://localhost:8080/kvbrouting/service/insert">/kvbrouting
+	 * /service/insert</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/")
-	public String getStandorteFahrraeder() throws JsonParseException,
+	@Path("/insert")
+	public String insertFahrraederRouting() throws JsonParseException,
 			JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		Facade facade = null;
-		return "hällo wörld";
+		Facade facade = new RoutingFacade();
+		return facade.getJson();
 	}
 
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/json")
+	public String getJson() throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new JsonFacade();
+		return facade.getJson();
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/json/{number}")
+	public String getJson(@PathParam("number") Integer number)
+			throws JsonParseException, JsonMappingException, IOException,
+			SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new JsonFacade(number);
+		return facade.getJson();
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/geojson")
+	public String getGeojson() throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new GeoJsonFacade();
+		return facade.getJson();
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/geojson/{number}")
+	public String getGeojson(@PathParam("number") Integer number)
+			throws JsonParseException, JsonMappingException, IOException,
+			SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new GeoJsonFacade(number);
+		return facade.getJson();
+	}
 }
