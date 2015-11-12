@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.naming.NamingException;
 
@@ -18,7 +17,7 @@ import de.illilli.jdbc.ConnectionFactory;
 public class SelectLastRun {
 
 	String queryString = "/selectLastRun.sql";
-	private Timestamp lastrun;
+	private KvbradroutingDb kvradroutingDb;
 
 	public SelectLastRun() throws SQLException, NamingException, IOException {
 		Connection conn = ConnectionFactory.getConnection();
@@ -26,13 +25,13 @@ public class SelectLastRun {
 				queryString);
 		String sql = IOUtils.toString(inputStream);
 		QueryRunner query = new QueryRunner();
-		ResultSetHandler<Timestamp> handler = new BeanHandler<Timestamp>(
-				Timestamp.class);
-		lastrun = query.query(conn, sql, handler);
+		ResultSetHandler<KvbradroutingDb> handler = new BeanHandler<KvbradroutingDb>(
+				KvbradroutingDb.class);
+		kvradroutingDb = query.query(conn, sql, handler);
 	}
 
 	public long getLastRun() {
-		return lastrun.getTime();
+		return kvradroutingDb.getModtime().getTime();
 	}
 
 }

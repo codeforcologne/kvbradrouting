@@ -29,13 +29,13 @@ import org.postgresql.ds.PGSimpleDataSource;
  * </pre>
  *
  */
-public class ConnectionFactory {
+public class JndiProperties {
 
 	private static final String JNDI_PROPERTIES = "/jndi.properties";
 
 	public static void setUpConnectionForJndi() throws IOException {
 
-		InputStream inputStream = ConnectionFactory.class
+		InputStream inputStream = JndiProperties.class
 				.getResourceAsStream(JNDI_PROPERTIES);
 		Properties properties = new Properties();
 		properties.load(inputStream);

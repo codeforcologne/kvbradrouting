@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 
 import org.junit.Before;
 
-public class SelectLastRunTest {
+public class InsertLastRunTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -17,9 +17,9 @@ public class SelectLastRunTest {
 			NamingException, IOException {
 		JndiProperties.setUpConnectionForJndi();
 
-		SelectLastRun lastRun = new SelectLastRun();
-		long last = lastRun.getLastRun();
-		System.out.println(last);
+		InsertLastRun lastRun = new InsertLastRun("test");
+		int numberOfInserts = lastRun.getNumberOfInserts();
+		System.out.println(numberOfInserts);
 	}
 
 }

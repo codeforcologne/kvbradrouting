@@ -35,4 +35,8 @@ public class InsertLastRun {
 
 		logger.info(inserts + " inserted");
 	}
+
+	public int getNumberOfInserts() {
+		return inserts;
+	}
 }
