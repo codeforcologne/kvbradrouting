@@ -7,6 +7,8 @@ import javax.naming.NamingException;
 
 import org.junit.Before;
 
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastRun;
+
 public class SelectLastRunTest {
 
 	@Before

@@ -1,4 +1,4 @@
-package de.illilli.opendata.service.kvbradrouting;
+package de.illilli.opendata.service.kvbradrouting.jdbc;
 
 import java.sql.Timestamp;
 
