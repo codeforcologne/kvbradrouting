@@ -17,7 +17,7 @@ public class InsertRoutingTest {
 	}
 
 	public static void main(String[] args) throws IOException, SQLException,
-			NamingException {
+			NamingException, ClassNotFoundException {
 
 		JndiProperties.setUpConnectionForJndi();
 		int number = 1;
