@@ -85,4 +85,8 @@ public class AskForRouting {
 		return distance;
 	}
 
+	public List<Double[]> getGeoJsonList() {
+		return pointList.toGeoJson();
+	}
+
 }
