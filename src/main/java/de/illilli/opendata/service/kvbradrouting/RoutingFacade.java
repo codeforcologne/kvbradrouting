@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 import org.geojson.FeatureCollection;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.graphhopper.util.PointList;
 import com.graphhopper.util.shapes.GHPoint;
 
 import de.illilli.opendata.service.Facade;
-import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastRun;
+import de.illilli.opendata.service.kvbradrouting.jdbc.InsertRouting;
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrun;
 
 /**
  * Diese Facade ermittelt das Routing zwischen den Points der Fahrräder. Es
@@ -27,17 +27,26 @@ public class RoutingFacade implements Facade {
 
 	private FeatureCollection featureCollection;
 
-	public RoutingFacade() throws SQLException, NamingException, IOException {
-		// 1. Prüfe, wann der letzte Lauf war
-		long lastRun = new SelectLastRun().getLastRun();
-		// 2. lese alle Änderungen nach dem letzten Lauf
-		// 3. erstelle für alle Räder, bei denen sich was geändert hat ein
+	public RoutingFacade() throws SQLException, NamingException, IOException,
+			ClassNotFoundException {
+		// Prüfe, wann der letzte Lauf war
+		long lastrun = new SelectLastrun().getTime();
+		// lese alle Änderungen nach dem letzten Lauf
+		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
+		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
-		List<GHPoint> ghPointList = new ArrayList<GHPoint>();
-		// fuelle die pointList
-		AskForRouting askFor = new AskForRouting(ghPointList);
-		// 4. schreibe das Ergebnis als LineString in die Datenbank
-		PointList pointList = askFor.getPointList();
+		for (Integer number : askForBikes.getBikesMap().keySet()) {
+			List<GHPoint> ghPointList = new ArrayList<GHPoint>();
+			GHPoint ghPoint = new GHPoint();
+			// fuelle die pointList
+			AskForRouting askFor = new AskForRouting(ghPointList);
+			// schreibe das Ergebnis für jedes Fahrrad als LineString in die
+			// Datenbank
+			List<Double[]> points = askFor.getGeoJsonList();
+			new InsertRouting(number, askFor.getTimeInMillis(),
+					askFor.getDistance(), points);
+		}
+
 	}
 
 	@Override

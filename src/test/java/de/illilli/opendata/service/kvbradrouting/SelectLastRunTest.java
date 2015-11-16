@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 
 import org.junit.Before;
 
-import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastRun;
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrun;
 
 public class SelectLastRunTest {
 
@@ -19,8 +19,8 @@ public class SelectLastRunTest {
 			NamingException, IOException {
 		JndiProperties.setUpConnectionForJndi();
 
-		SelectLastRun lastRun = new SelectLastRun();
-		long last = lastRun.getLastRun();
+		SelectLastrun lastRun = new SelectLastrun();
+		long last = lastRun.getTime();
 		System.out.println(last);
 	}
 

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -24,15 +25,20 @@ public class InsertRouting {
 	String queryString = "/insertRouting.sql";
 
 	public InsertRouting(int number, long timeInMillis, double distance,
-			Point[] points) throws SQLException, NamingException, IOException,
-			ClassNotFoundException {
+			List<Double[]> points) throws SQLException, NamingException,
+			IOException, ClassNotFoundException {
 
 		Connection conn = ConnectionFactory.getConnection();
 		InputStream inputStream = this.getClass().getResourceAsStream(
 				this.queryString);
 		String sql = IOUtils.toString(inputStream);
 
-		LineString lineString = new LineString(points);
+		Point[] pointArray = new Point[points.size()];
+		for (int i = 0; i < points.size(); i++) {
+			Double[] point = points.get(i);
+			pointArray[i] = new Point(point[0], point[1]);
+		}
+		LineString lineString = new LineString(pointArray);
 		lineString.srid = 4326;
 
 		((org.postgresql.PGConnection) conn).addDataType("geometry",

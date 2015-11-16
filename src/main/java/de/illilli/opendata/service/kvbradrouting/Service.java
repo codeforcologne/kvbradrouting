@@ -44,12 +44,14 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/insert")
 	public String insertFahrraederRouting() throws JsonParseException,
-			JsonMappingException, IOException, SQLException, NamingException {
+			JsonMappingException, IOException, SQLException, NamingException,
+			ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new RoutingFacade();

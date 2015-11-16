@@ -14,12 +14,12 @@ import org.apache.commons.io.IOUtils;
 
 import de.illilli.jdbc.ConnectionFactory;
 
-public class SelectLastRun {
+public class SelectLastrun {
 
 	String queryString = "/selectLastRun.sql";
 	private KvbradroutingDb kvradroutingDb;
 
-	public SelectLastRun() throws SQLException, NamingException, IOException {
+	public SelectLastrun() throws SQLException, NamingException, IOException {
 		Connection conn = ConnectionFactory.getConnection();
 		InputStream inputStream = this.getClass().getResourceAsStream(
 				queryString);
@@ -30,7 +30,7 @@ public class SelectLastRun {
 		kvradroutingDb = query.query(conn, sql, handler);
 	}
 
-	public long getLastRun() {
+	public long getTime() {
 		return kvradroutingDb.getModtime().getTime();
 	}
 

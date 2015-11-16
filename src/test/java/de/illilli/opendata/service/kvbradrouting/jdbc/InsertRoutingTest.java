@@ -2,11 +2,12 @@ package de.illilli.opendata.service.kvbradrouting.jdbc;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
 import org.junit.Before;
-import org.postgis.Point;
 
 import de.illilli.opendata.service.kvbradrouting.JndiProperties;
 
@@ -23,12 +24,18 @@ public class InsertRoutingTest {
 		int number = 1;
 		long timeInMillis = 1;
 		double distance = 1.0;
-		Point[] points = new Point[2];
-		points[0] = new Point(0, 1);
-		points[1] = new Point(1, 0);
+		List<Double[]> pointsArray = new ArrayList<Double[]>();
+		Double[] point = new Double[2];
+		point[0] = 0.0;
+		point[1] = 1.0;
+		pointsArray.add(point);
+		point = new Double[2];
+		point[0] = 1.0;
+		point[1] = 0.0;
+		pointsArray.add(point);
 
 		InsertRouting insert = new InsertRouting(number, timeInMillis,
-				distance, points);
+				distance, pointsArray);
 		int numberOfInserts = insert.getNumberOfInserts();
 		System.out.println(numberOfInserts);
 
