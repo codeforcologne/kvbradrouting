@@ -5,11 +5,15 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 
 import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRun;
 
 public class InsertLastRunTest {
+
+	private static final Logger logger = Logger
+			.getLogger(InsertLastRunTest.class);
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,7 +25,7 @@ public class InsertLastRunTest {
 
 		InsertLastRun lastRun = new InsertLastRun("test");
 		int numberOfInserts = lastRun.getNumberOfInserts();
-		System.out.println(numberOfInserts);
+		logger.debug("numberOfInserts: " + numberOfInserts);
 	}
 
 }

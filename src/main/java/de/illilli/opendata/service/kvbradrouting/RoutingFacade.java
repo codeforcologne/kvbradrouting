@@ -14,12 +14,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.graphhopper.util.shapes.GHPoint;
 
 import de.illilli.opendata.service.Facade;
+import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRun;
 import de.illilli.opendata.service.kvbradrouting.jdbc.InsertRouting;
 import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrun;
 
 /**
  * Diese Facade ermittelt das Routing zwischen den Points der Fahrräder. Es
- * sollen nicht bei jedem Lauf alle points ermittelt werden.
+ * sollen nicht bei jedem Lauf alle points ermittelt werden. Daher wird beim
+ * letzten Lauf ein Zeitstempel in der Datenbank gesetzt, der als Anhaltspunkt
+ * für den nächsten Lauf dient.
  */
 public class RoutingFacade implements Facade {
 
@@ -46,7 +49,14 @@ public class RoutingFacade implements Facade {
 			new InsertRouting(number, askFor.getTimeInMillis(),
 					askFor.getDistance(), points);
 		}
-
+		// vermerken, dass Daten geschrieben wurde
+		int numberOfInserts = new InsertLastRun(askForBikes.getBikesMap()
+				.size() + " inserted").getNumberOfInserts();
+		if (numberOfInserts > 0) {
+			logger.info("number of bikes: " + askForBikes.getBikesMap().size());
+		} else {
+			logger.warn("unable to set lastrun; please check database");
+		}
 	}
 
 	@Override

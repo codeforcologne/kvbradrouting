@@ -3,6 +3,7 @@ package de.illilli.opendata.service.kvbradrouting;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,9 @@ public abstract class AskForBikes {
 		}.getType();
 		String json = IOUtils.toString(inputStream);
 		Map<Integer, List<BikeBo>> bikesMap = gson.fromJson(json, type);
+		if (bikesMap == null) {
+			bikesMap = new Hashtable<Integer, List<BikeBo>>();
+		}
 		return bikesMap;
 	}
-
 }
