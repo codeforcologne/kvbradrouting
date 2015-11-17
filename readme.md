@@ -10,7 +10,7 @@ Es ist möglich die durch die Routing Funktion erstellten Daten im Json-Format �
 
 ### Insert Service
 
-Das Routing wird über den REST-EndPoint /kvbrouting/service/insert ausgelöst. Durch seinen Aufruf, werden zunächst alle Fahrräder bestimmt, deren Positionen sich seit dem letzten Durchgang verändert haben. Danach wird auf alle gespeicherten Standorte das Routing durchgeführt. Die ermittelten Werte werden als LINESTRING in der Datenbank gespeichert. Wenn dieser Service wiederholt ausgeführt werden soll, sollte dies z.B. mit Hilfe des cron erfolgten.
+Das Routing wird über den REST-EndPoint '/kvbrouting/service/insert' ausgelöst. Durch seinen Aufruf, werden zunächst alle Fahrräder bestimmt, deren Positionen sich seit dem letzten Durchgang verändert haben. Danach wird auf alle gespeicherten Standorte das Routing durchgeführt. Die ermittelten Werte werden als LINESTRING in der Datenbank gespeichert. Wenn dieser Service wiederholt ausgeführt werden soll, sollte dies z.B. mit Hilfe des cron erfolgten.
 
 ### GeoJson Service
 
