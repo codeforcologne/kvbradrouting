@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.NamingException;
 
@@ -38,14 +39,23 @@ public class RoutingFacade implements Facade {
 		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
 		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
-		for (Integer number : askForBikes.getBikesMap().keySet()) {
+		for (Map.Entry<Integer, List<BikeBo>> entry : askForBikes.getBikesMap()
+				.entrySet()) {
+			Integer number = entry.getKey();
+			List<BikeBo> bikeBoList = entry.getValue();
+
 			List<GHPoint> ghPointList = new ArrayList<GHPoint>();
-			GHPoint ghPoint = new GHPoint();
+			for (BikeBo bikeBo : bikeBoList) {
+				GHPoint ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
+				ghPointList.add(ghPoint);
+			}
+
 			// fuelle die pointList
 			AskForRouting askFor = new AskForRouting(ghPointList);
 			// schreibe das Ergebnis für jedes Fahrrad als LineString in die
 			// Datenbank
 			List<Double[]> points = askFor.getGeoJsonList();
+			// aber vorher loesche die alten Werte
 			new InsertRouting(number, askFor.getTimeInMillis(),
 					askFor.getDistance(), points);
 		}

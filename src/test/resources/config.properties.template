@@ -1,6 +1,6 @@
 # in dieser Datei wird die Anwendung konfiguriert. 
 # Sie ist aber nur eine Vorlage. 
-# Die fehlenden Einträge müssen ergänzt werden.
+# Die fehlenden EintrÃ¤ge mÃ¼ssen ergÃ¤nzt werden.
 # Danach ist die Datei in config.properties zu kopieren.
-graphhopper.licence.key=07d3a062-b6b3-44bf-a7a5-873783f9e116
+graphhopper.licence.key=<yourkey>
 kvblive.bikesmap.url=http://localhost:8080/kvbradlive/service/bikesmap
