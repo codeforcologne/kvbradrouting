@@ -23,7 +23,7 @@ public class InsertLastRunTest {
 			NamingException, IOException {
 		JndiProperties.setUpConnectionForJndi();
 
-		InsertLastRun lastRun = new InsertLastRun("test");
+		InsertLastRun lastRun = new InsertLastRun(10);
 		int numberOfInserts = lastRun.getNumberOfInserts();
 		logger.debug("numberOfInserts: " + numberOfInserts);
 	}

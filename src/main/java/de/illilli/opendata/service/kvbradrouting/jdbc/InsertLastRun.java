@@ -20,8 +20,8 @@ public class InsertLastRun {
 
 	String queryString = "/insertLastRun.sql";
 
-	public InsertLastRun(String comment) throws SQLException, NamingException,
-			IOException {
+	public InsertLastRun(int numberOfInserts) throws SQLException,
+			NamingException, IOException {
 
 		Connection conn = ConnectionFactory.getConnection();
 		InputStream inputStream = this.getClass().getResourceAsStream(
@@ -29,7 +29,7 @@ public class InsertLastRun {
 		String sql = IOUtils.toString(inputStream);
 
 		QueryRunner run = new QueryRunner();
-		inserts = run.update(conn, sql, comment);
+		inserts = run.update(conn, sql, numberOfInserts);
 
 		conn.close();
 
