@@ -34,12 +34,12 @@ public class RoutingFacade implements Facade {
 		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
 		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
-		InsertRoutingCollectorByBike insertRouting = new InsertRoutingCollectorByBike(
+		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByBike(
 				askForBikes);
 		// vermerken, dass Daten geschrieben wurde
-		int numberOfInserts = new InsertLastRun(
-				insertRouting.getNumberOfInserts() + " inserted")
-				.getNumberOfInserts();
+		InsertLastRun insertOfLastRun = new InsertLastRun(
+				insertRouting.getNumberOfInserts());
+		int numberOfInserts = insertOfLastRun.getNumberOfInserts();
 		if (numberOfInserts > 0) {
 			logger.info("number of bikes: " + askForBikes.getBikesMap().size());
 		} else {

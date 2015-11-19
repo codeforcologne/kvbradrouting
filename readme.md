@@ -27,7 +27,7 @@ Für die Verwendung dieses Service wird eine PostgreSQL mit PostGis benötigt un
 ### Tabelle für die Zeitpunkt der letzten Abfrage
 
 	CREATE TABLE kvbradrouting (
-	    comment      varchar(256),
+	    numberofinsert      integer,
 	    modtime      timestamp DEFAULT current_timestamp
 	);
 
