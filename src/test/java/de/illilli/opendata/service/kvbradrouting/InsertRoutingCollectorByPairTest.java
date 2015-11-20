@@ -23,7 +23,7 @@ public class InsertRoutingCollectorByPairTest {
 
 	private static final Logger logger = Logger
 			.getLogger(InsertRoutingCollectorByPairTest.class);
-	private AskForBikes askForBikes;
+
 	private static final long ONEDAY = 864000000;
 
 	@Before
