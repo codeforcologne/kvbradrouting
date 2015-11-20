@@ -22,9 +22,9 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 	private static final Logger logger = Logger
 			.getLogger(InsertRoutingCollectorByPair.class);
 
-	public InsertRoutingCollectorByPair(Map<Integer, List<BikeBo>> bikesMap)
-			throws ClassNotFoundException, IOException, SQLException,
-			NamingException {
+	public InsertRoutingCollectorByPair(Map<Integer, List<BikeBo>> bikesMap,
+			long lastrun) throws ClassNotFoundException, IOException,
+			SQLException, NamingException {
 
 		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
 			Integer number = entry.getKey();
@@ -44,7 +44,9 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 					ghPointList.add(ghPoint);
 					firstRun = true;
 					logger.info("insert [" + number + "]: " + ghPointList);
-					// routeAndInsert(number, ghPointList);
+					if (bikeBo.getTimestamp().getTime() >= lastrun) {
+						// routeAndInsert(number, ghPointList);
+					}
 				}
 			}
 		}
