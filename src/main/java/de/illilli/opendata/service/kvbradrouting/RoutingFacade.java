@@ -35,7 +35,7 @@ public class RoutingFacade implements Facade {
 		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
 		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByBike(
-				askForBikes);
+				askForBikes.getBikesMap());
 		// vermerken, dass Daten geschrieben wurde
 		InsertLastRun insertOfLastRun = new InsertLastRun(
 				insertRouting.getNumberOfInserts());

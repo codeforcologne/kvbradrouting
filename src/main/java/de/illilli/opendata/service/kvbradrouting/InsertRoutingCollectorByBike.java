@@ -12,14 +12,11 @@ import com.graphhopper.util.shapes.GHPoint;
 
 public class InsertRoutingCollectorByBike extends InsertRoutingCollector {
 
-	private int numberOfInserts;
-
-	public InsertRoutingCollectorByBike(AskForBikes askForBikes)
+	public InsertRoutingCollectorByBike(Map<Integer, List<BikeBo>> bikesMap)
 			throws ClassNotFoundException, IOException, SQLException,
 			NamingException {
 
-		for (Map.Entry<Integer, List<BikeBo>> entry : askForBikes.getBikesMap()
-				.entrySet()) {
+		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
 			Integer number = entry.getKey();
 			List<BikeBo> bikeBoList = entry.getValue();
 
@@ -33,5 +30,4 @@ public class InsertRoutingCollectorByBike extends InsertRoutingCollector {
 		}
 
 	}
-
 }

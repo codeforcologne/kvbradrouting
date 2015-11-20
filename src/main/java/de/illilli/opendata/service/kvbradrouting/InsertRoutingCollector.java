@@ -10,7 +10,7 @@ import com.graphhopper.util.shapes.GHPoint;
 
 import de.illilli.opendata.service.kvbradrouting.jdbc.InsertRouting;
 
-public class InsertRoutingCollector {
+public abstract class InsertRoutingCollector {
 
 	int numberOfInserts;
 

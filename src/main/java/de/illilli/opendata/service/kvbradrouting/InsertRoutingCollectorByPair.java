@@ -8,14 +8,19 @@ import java.util.Map;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import com.graphhopper.util.shapes.GHPoint;
 
 /**
  * Diese Klasse gruppiert die Liste der übergebenen Fahrrad-Positionen zu Paaren
  * und fragt mit dieser Information den Graphhoper Server nach Routing
- * Informationen.
+ * Informationen. Danach wird diese Route in die Datenbank geschrieben.
  */
 public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
+
+	private static final Logger logger = Logger
+			.getLogger(InsertRoutingCollectorByPair.class);
 
 	public InsertRoutingCollectorByPair(Map<Integer, List<BikeBo>> bikesMap)
 			throws ClassNotFoundException, IOException, SQLException,
@@ -24,16 +29,24 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
 			Integer number = entry.getKey();
 			List<BikeBo> bikeBoList = entry.getValue();
+			boolean firstRun = true;
 
+			GHPoint ghPoint = null;
 			List<GHPoint> ghPointList = new ArrayList<GHPoint>();
 			for (BikeBo bikeBo : bikeBoList) {
-				GHPoint ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
-				ghPointList.add(ghPoint);
+				if (firstRun) {
+					ghPointList = new ArrayList<GHPoint>();
+					ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
+					ghPointList.add(ghPoint);
+					firstRun = false;
+				} else {
+					ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
+					ghPointList.add(ghPoint);
+					firstRun = true;
+					logger.info("insert [" + number + "]: " + ghPointList);
+					// routeAndInsert(number, ghPointList);
+				}
 			}
-
-			// routeAndInsert(number, ghPointList);
 		}
-
 	}
-
 }
