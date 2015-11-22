@@ -22,9 +22,22 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 	private static final Logger logger = Logger
 			.getLogger(InsertRoutingCollectorByPair.class);
 
-	public InsertRoutingCollectorByPair(Map<Integer, List<BikeBo>> bikesMap,
-			long lastrun) throws ClassNotFoundException, IOException,
-			SQLException, NamingException {
+	/**
+	 * Der Übergabeparameter legt fest, welche Implemtierung für Routing und
+	 * Inserting der ermittelten Daten verwendet werden soll. Auf diese Weise
+	 * ist es möglich diese beiden Elemente z.B. für einen Test mit einer
+	 * funktionslosen Implementierung zu betreiben.
+	 * 
+	 * @param routeAndInsert
+	 */
+	public InsertRoutingCollectorByPair(RouteAndInsert routeAndInsert) {
+		this.routeAndInsert = routeAndInsert;
+	}
+
+	@Override
+	public void routeAndInsert(long lastrun, Map<Integer, List<BikeBo>> bikesMap)
+			throws SQLException, NamingException, IOException,
+			ClassNotFoundException {
 
 		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
 			Integer number = entry.getKey();
@@ -45,10 +58,11 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 					firstRun = true;
 					logger.info("insert [" + number + "]: " + ghPointList);
 					if (bikeBo.getTimestamp().getTime() >= lastrun) {
-						// routeAndInsert(number, ghPointList);
+						routeAndInsert.run(number, ghPointList);
 					}
 				}
 			}
 		}
 	}
+
 }

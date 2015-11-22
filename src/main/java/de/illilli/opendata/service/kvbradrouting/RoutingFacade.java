@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
-import org.geojson.FeatureCollection;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -24,8 +23,6 @@ public class RoutingFacade implements Facade {
 
 	private static final Logger logger = Logger.getLogger(RoutingFacade.class);
 
-	private FeatureCollection featureCollection;
-
 	public RoutingFacade() throws SQLException, NamingException, IOException,
 			ClassNotFoundException {
 		// Prüfe, wann der letzte Lauf war
@@ -34,8 +31,9 @@ public class RoutingFacade implements Facade {
 		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
 		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
-		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByBike(
-				askForBikes.getBikesMap());
+		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByPair(
+				new RouteAndInsertToDb());
+		insertRouting.routeAndInsert(lastrun, askForBikes.getBikesMap());
 		// vermerken, dass Daten geschrieben wurde
 		InsertLastRun insertOfLastRun = new InsertLastRun(
 				insertRouting.getNumberOfInserts());

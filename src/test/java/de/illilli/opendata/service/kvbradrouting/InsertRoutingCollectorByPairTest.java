@@ -25,6 +25,8 @@ public class InsertRoutingCollectorByPairTest {
 			.getLogger(InsertRoutingCollectorByPairTest.class);
 
 	private static final long ONEDAY = 864000000;
+	private static final long ONEHOUR = 3600000;
+	private static final long SIXHOURS = 21600000;
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,7 +38,7 @@ public class InsertRoutingCollectorByPairTest {
 			IOException, SQLException, NamingException {
 		InputStream inputStream = this.getClass().getResourceAsStream(
 				"/bikesmap.json");
-		long lastrun = System.currentTimeMillis() - ONEDAY;
+		long lastrun = System.currentTimeMillis() - 864000000;
 		Gson gson = new Gson();
 		Type type = new TypeToken<Map<Integer, List<BikeBo>>>() {
 		}.getType();
@@ -44,7 +46,8 @@ public class InsertRoutingCollectorByPairTest {
 		Map<Integer, List<BikeBo>> bikesMap = gson.fromJson(json, type);
 
 		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByPair(
-				bikesMap, lastrun);
+				new RouteAndInsertForTest());
+		insertRouting.routeAndInsert(lastrun, bikesMap);
 		int numberOfInserts = insertRouting.getNumberOfInserts();
 		logger.info(numberOfInserts);
 	}

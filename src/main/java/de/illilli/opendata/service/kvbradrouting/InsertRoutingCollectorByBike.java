@@ -8,13 +8,23 @@ import java.util.Map;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import com.graphhopper.util.shapes.GHPoint;
 
 public class InsertRoutingCollectorByBike extends InsertRoutingCollector {
 
-	public InsertRoutingCollectorByBike(Map<Integer, List<BikeBo>> bikesMap)
-			throws ClassNotFoundException, IOException, SQLException,
-			NamingException {
+	private static final Logger logger = Logger
+			.getLogger(InsertRoutingCollectorByBike.class);
+
+	public InsertRoutingCollectorByBike(RouteAndInsert routeAndInsert) {
+		this.routeAndInsert = routeAndInsert;
+	}
+
+	@Override
+	public void routeAndInsert(long lastrun, Map<Integer, List<BikeBo>> bikesMap)
+			throws SQLException, NamingException, IOException,
+			ClassNotFoundException {
 
 		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
 			Integer number = entry.getKey();
@@ -26,7 +36,7 @@ public class InsertRoutingCollectorByBike extends InsertRoutingCollector {
 				ghPointList.add(ghPoint);
 			}
 
-			routeAndInsert(number, ghPointList);
+			routeAndInsert.run(number, ghPointList);
 		}
 
 	}
