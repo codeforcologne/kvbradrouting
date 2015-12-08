@@ -58,6 +58,19 @@ public class Service {
 		return facade.getJson();
 	}
 
+	/**
+	 * <p>
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/json">
+	 * /kvbradrouting/service/json</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json")
@@ -69,6 +82,21 @@ public class Service {
 		return facade.getJson();
 	}
 
+	/**
+	 * <p>
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/json/21617">
+	 * /kvbradrouting/service/json/21617</a>
+	 * </p>
+	 * 
+	 * 
+	 * @param number
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json/{number}")

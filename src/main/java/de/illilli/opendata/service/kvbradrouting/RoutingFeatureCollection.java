@@ -9,18 +9,18 @@ import org.geojson.FeatureCollection;
 import org.geojson.LineString;
 import org.geojson.LngLatAlt;
 
-import de.illilli.opendata.service.kvbradrouting.jdbc.RoutingDb;
+import de.illilli.opendata.service.kvbradrouting.jdbc.RoutingDao;
 import de.illilli.opendata.service.kvbradrouting.jdbc.Select;
 
 public class RoutingFeatureCollection {
 
 	private FeatureCollection featureCollection;
 
-	public RoutingFeatureCollection(Select<RoutingDb> select) {
+	public RoutingFeatureCollection(Select<RoutingDao> select) {
 		featureCollection = new FeatureCollection();
 
-		List<RoutingDb> routingList = select.getDbObjectList();
-		for (RoutingDb routingDb : routingList) {
+		List<RoutingDao> routingList = select.getDbObjectList();
+		for (RoutingDao routingDb : routingList) {
 			Feature feature = new Feature();
 			LineString lineString = new LineString();
 			org.postgis.LineString pgLineString = (org.postgis.LineString) routingDb

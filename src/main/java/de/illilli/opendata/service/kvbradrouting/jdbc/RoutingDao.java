@@ -14,7 +14,7 @@ import org.postgis.PGgeometry;
  * </pre>
  *
  */
-public class RoutingDb {
+public class RoutingDao {
 
 	private int number;
 	private long timeinmillis;
@@ -91,7 +91,7 @@ public class RoutingDb {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RoutingDb other = (RoutingDb) obj;
+		RoutingDao other = (RoutingDao) obj;
 		if (Double.doubleToLongBits(distance) != Double
 				.doubleToLongBits(other.distance))
 			return false;

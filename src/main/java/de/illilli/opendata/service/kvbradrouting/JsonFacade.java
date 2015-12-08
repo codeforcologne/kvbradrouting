@@ -1,23 +1,36 @@
 package de.illilli.opendata.service.kvbradrouting;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.naming.NamingException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
 
 import de.illilli.opendata.service.Facade;
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectRouting;
 
 public class JsonFacade implements Facade {
 
-	public JsonFacade(Integer number) {
-		// TODO Auto-generated constructor stub
+	private List<RoutingBo> routingList;
+
+	public JsonFacade(Integer number) throws SQLException, NamingException,
+			IOException {
+		routingList = new RoutingCollection(new SelectRouting(number))
+				.getRoutingList();
 	}
 
-	public JsonFacade() {
-		// TODO Auto-generated constructor stub
+	public JsonFacade() throws SQLException, NamingException, IOException {
+		routingList = new RoutingCollection(new SelectRouting())
+				.getRoutingList();
 	}
 
 	@Override
 	public String getJson() throws JsonProcessingException {
-		// TODO Auto-generated method stub
-		return null;
+		Gson gson = new Gson();
+		return gson.toJson(routingList);
 	}
 
 }
