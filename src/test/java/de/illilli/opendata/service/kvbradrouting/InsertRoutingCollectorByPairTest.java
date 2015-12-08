@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class InsertRoutingCollectorByPairTest {
 			IOException, SQLException, NamingException {
 		InputStream inputStream = this.getClass().getResourceAsStream(
 				"/bikesmap.json");
-		long lastrun = System.currentTimeMillis() - 864000000;
+		long lastrun = 0;
 		Gson gson = new Gson();
 		Type type = new TypeToken<Map<Integer, List<BikeBo>>>() {
 		}.getType();
@@ -48,8 +49,9 @@ public class InsertRoutingCollectorByPairTest {
 		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByPair(
 				new RouteAndInsertForTest());
 		insertRouting.routeAndInsert(lastrun, bikesMap);
-		int numberOfInserts = insertRouting.getNumberOfInserts();
-		logger.info(numberOfInserts);
+		int actual = insertRouting.getNumberOfInserts();
+		int expected = 1841;
+		Assert.assertEquals(expected, actual);
 	}
 
 	/**
