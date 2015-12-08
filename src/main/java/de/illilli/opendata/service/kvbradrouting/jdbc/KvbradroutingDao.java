@@ -2,7 +2,7 @@ package de.illilli.opendata.service.kvbradrouting.jdbc;
 
 import java.sql.Timestamp;
 
-public class KvbradroutingDb {
+public class KvbradroutingDao {
 
 	private Timestamp modtime;
 	private String comment;
@@ -40,7 +40,7 @@ public class KvbradroutingDb {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		KvbradroutingDb other = (KvbradroutingDb) obj;
+		KvbradroutingDao other = (KvbradroutingDao) obj;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;

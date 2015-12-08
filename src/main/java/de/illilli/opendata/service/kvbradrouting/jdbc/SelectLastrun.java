@@ -17,7 +17,7 @@ import de.illilli.jdbc.ConnectionFactory;
 public class SelectLastrun {
 
 	String queryString = "/selectLastRun.sql";
-	private KvbradroutingDb kvradroutingDb;
+	private KvbradroutingDao kvradroutingDb;
 
 	public SelectLastrun() throws SQLException, NamingException, IOException {
 		Connection conn = ConnectionFactory.getConnection();
@@ -25,8 +25,8 @@ public class SelectLastrun {
 				queryString);
 		String sql = IOUtils.toString(inputStream);
 		QueryRunner query = new QueryRunner();
-		ResultSetHandler<KvbradroutingDb> handler = new BeanHandler<KvbradroutingDb>(
-				KvbradroutingDb.class);
+		ResultSetHandler<KvbradroutingDao> handler = new BeanHandler<KvbradroutingDao>(
+				KvbradroutingDao.class);
 		kvradroutingDb = query.query(conn, sql, handler);
 	}
 
