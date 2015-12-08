@@ -92,6 +92,21 @@ public class Service {
 		return facade.getJson();
 	}
 
+	/**
+	 * <p>
+	 * Bsp.: <a
+	 * href="http://localhost:8080/kvbradrouting/service/geojson/21617">
+	 * /kvbradrouting/service/geojson/21617</a>
+	 * </p>
+	 * 
+	 * @param number
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson/{number}")

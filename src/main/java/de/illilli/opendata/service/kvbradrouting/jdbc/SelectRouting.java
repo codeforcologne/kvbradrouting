@@ -15,4 +15,11 @@ public class SelectRouting extends Select<RoutingDb> {
 		runSelect(new BeanListHandler<RoutingDb>(RoutingDb.class), params);
 	}
 
+	public SelectRouting(Integer number) throws SQLException, NamingException,
+			IOException {
+		queryString = "/selectRoutingByNumber.sql";
+		Object[] params = new Object[] { number };
+		runSelect(new BeanListHandler<RoutingDb>(RoutingDb.class), params);
+	}
+
 }
