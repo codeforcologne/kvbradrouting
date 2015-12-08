@@ -8,7 +8,7 @@ import javax.naming.NamingException;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 
-import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRun;
+import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRunToDb;
 
 public class InsertLastRunTest {
 
@@ -23,7 +23,7 @@ public class InsertLastRunTest {
 			NamingException, IOException {
 		JndiProperties.setUpConnectionForJndi();
 
-		InsertLastRun lastRun = new InsertLastRun(10);
+		InsertLastRunToDb lastRun = new InsertLastRunToDb(10);
 		int numberOfInserts = lastRun.getNumberOfInserts();
 		logger.debug("numberOfInserts: " + numberOfInserts);
 	}

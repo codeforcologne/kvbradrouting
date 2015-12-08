@@ -9,7 +9,7 @@ import javax.naming.NamingException;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 
-import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrun;
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrunFromDb;
 
 public class SelectLastRunTest {
 
@@ -24,7 +24,7 @@ public class SelectLastRunTest {
 			NamingException, IOException {
 		JndiProperties.setUpConnectionForJndi();
 
-		SelectLastrun lastRun = new SelectLastrun();
+		SelectLastrunFromDb lastRun = new SelectLastrunFromDb();
 		long last = lastRun.getTime();
 		logger.debug("lastRun: " + new Date(last).toString());
 	}

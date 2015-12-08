@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.opendata.service.Facade;
-import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRun;
-import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrun;
+import de.illilli.opendata.service.kvbradrouting.jdbc.InsertLastRunToDb;
+import de.illilli.opendata.service.kvbradrouting.jdbc.SelectLastrunFromDb;
 
 /**
  * Diese Facade ermittelt das Routing zwischen den Points der Fahrräder. Es
@@ -23,19 +23,24 @@ public class RoutingFacade implements Facade {
 
 	private static final Logger logger = Logger.getLogger(RoutingFacade.class);
 
+	private long lastrun;
+	private AskForBikes askForBikes;
+	private InsertRoutingCollector insertRouting;
+	private InsertLastRun insertOfLastRun;
+
 	public RoutingFacade() throws SQLException, NamingException, IOException,
 			ClassNotFoundException {
 		// Prüfe, wann der letzte Lauf war
-		long lastrun = new SelectLastrun().getTime();
+		this.lastrun = new SelectLastrunFromDb().getTime();
 		// lese alle Änderungen nach dem letzten Lauf
-		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
+		this.askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
 		// erstelle für alle Räder, bei denen sich was geändert hat ein
 		// Routing über alle Points
-		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByPair(
+		this.insertRouting = new InsertRoutingCollectorByPair(
 				new RouteAndInsertToDb());
 		insertRouting.routeAndInsert(lastrun, askForBikes.getBikesMap());
 		// vermerken, dass Daten geschrieben wurde
-		InsertLastRun insertOfLastRun = new InsertLastRun(
+		this.insertOfLastRun = new InsertLastRunToDb(
 				insertRouting.getNumberOfInserts());
 		int numberOfInserts = insertOfLastRun.getNumberOfInserts();
 		if (numberOfInserts > 0) {
@@ -43,6 +48,23 @@ public class RoutingFacade implements Facade {
 		} else {
 			logger.warn("unable to set lastrun; please check database");
 		}
+	}
+
+	/**
+	 * Konstruktor for testing purpose.
+	 * 
+	 * @param selectLastrun
+	 * @param askForBikes
+	 * @param insertRoutingCollector
+	 * @param insertLastRun
+	 */
+	public RoutingFacade(SelectLastrun selectLastrun, AskForBikes askForBikes,
+			InsertRoutingCollector insertRoutingCollector,
+			InsertLastRun insertLastRun) {
+		this.lastrun = selectLastrun.getTime();
+		this.askForBikes = askForBikes;
+		this.insertRouting = insertRoutingCollector;
+		this.insertOfLastRun = insertLastRun;
 	}
 
 	@Override

@@ -12,15 +12,17 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import de.illilli.jdbc.ConnectionFactory;
+import de.illilli.opendata.service.kvbradrouting.InsertLastRun;
 
-public class InsertLastRun {
+public class InsertLastRunToDb implements InsertLastRun {
 
-	private static final Logger logger = Logger.getLogger(InsertLastRun.class);
+	private static final Logger logger = Logger
+			.getLogger(InsertLastRunToDb.class);
 	private int inserts;
 
 	String queryString = "/insertLastRun.sql";
 
-	public InsertLastRun(int numberOfInserts) throws SQLException,
+	public InsertLastRunToDb(int numberOfInserts) throws SQLException,
 			NamingException, IOException {
 
 		Connection conn = ConnectionFactory.getConnection();
@@ -36,6 +38,7 @@ public class InsertLastRun {
 		logger.info(inserts + " inserted");
 	}
 
+	@Override
 	public int getNumberOfInserts() {
 		return inserts;
 	}
