@@ -15,7 +15,9 @@ import com.google.gson.reflect.TypeToken;
 import de.illilli.opendata.service.Config;
 
 /**
- * Diese Klasse implementiert die Methode getBikesMap().
+ * Diese Klasse ist die Schnittstelle für alle AskForBikes Implementierungen und
+ * erwartet einen Stream. Die hier implementierte Methode getBikesMap() wandelt
+ * die Struktur in eine Map-Struktur.
  */
 public abstract class AskForBikes {
 
@@ -23,7 +25,8 @@ public abstract class AskForBikes {
 	InputStream inputStream;
 
 	/**
-	 * This class
+	 * Diese Methode übernimmt die per InputStream gelieferten Bikes und wandelt
+	 * sie mit Hilfe von Gson in ein Map<Integer, List<BikeBo>> Object.
 	 * 
 	 * @return
 	 * @throws IOException
