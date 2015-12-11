@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.naming.NamingException;
 
@@ -21,6 +22,7 @@ public class InsertLastRunToDb implements InsertLastRun {
 	private int inserts;
 
 	String queryString = "/insertLastRun.sql";
+	String queryStringWithTimestamp = "/insertLastRunWithTimestamp.sql";
 
 	public InsertLastRunToDb(int numberOfInserts) throws SQLException,
 			NamingException, IOException {
@@ -32,6 +34,23 @@ public class InsertLastRunToDb implements InsertLastRun {
 
 		QueryRunner run = new QueryRunner();
 		inserts = run.update(conn, sql, numberOfInserts);
+
+		conn.close();
+
+		logger.info(inserts + " inserted");
+	}
+
+	public InsertLastRunToDb(int numberOfInserts, long modtime)
+			throws SQLException, NamingException, IOException {
+
+		Connection conn = ConnectionFactory.getConnection();
+		InputStream inputStream = this.getClass().getResourceAsStream(
+				this.queryStringWithTimestamp);
+		String sql = IOUtils.toString(inputStream);
+
+		QueryRunner run = new QueryRunner();
+		inserts = run
+				.update(conn, sql, numberOfInserts, new Timestamp(modtime));
 
 		conn.close();
 
