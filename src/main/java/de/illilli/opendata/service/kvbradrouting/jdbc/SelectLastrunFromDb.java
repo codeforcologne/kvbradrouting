@@ -32,8 +32,14 @@ public class SelectLastrunFromDb implements SelectLastrun {
 		kvradroutingDb = query.query(conn, sql, handler);
 	}
 
+	@Override
 	public long getTime() {
-		return kvradroutingDb.getModtime().getTime();
+		if (kvradroutingDb == null) {
+			return 0;
+
+		} else {
+			return kvradroutingDb.getModtime().getTime();
+		}
 	}
 
 }
