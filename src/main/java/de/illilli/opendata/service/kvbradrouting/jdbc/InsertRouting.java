@@ -41,8 +41,8 @@ public class InsertRouting {
 		LineString lineString = new LineString(pointArray);
 		lineString.srid = 4326;
 
-		((org.postgresql.PGConnection) conn).addDataType("geometry",
-				Class.forName("org.postgis.PGgeometry"));
+		// ((org.postgresql.PGConnection) conn).addDataType("geometry",
+		// Class.forName("org.postgis.PGgeometry"));
 
 		PreparedStatement preparedStatement = conn.prepareStatement(sql);
 		preparedStatement.setInt(1, number);
