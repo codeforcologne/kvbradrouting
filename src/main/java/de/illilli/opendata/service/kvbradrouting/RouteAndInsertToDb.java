@@ -28,9 +28,13 @@ public class RouteAndInsertToDb implements RouteAndInsert {
 		// Datenbank
 		List<Double[]> points = askFor.getGeoJsonList();
 		// aber vorher loesche die alten Werte
-		InsertRouting insertRouting = new InsertRouting(number,
-				askFor.getTimeInMillis(), askFor.getDistance(), points);
-		numberOfInserts = insertRouting.getNumberOfInserts();
+		if (askFor.getPointList().getSize() > 1) {
+			// check for number of points to insert; if less than two points an
+			// exception is thrown
+			InsertRouting insertRouting = new InsertRouting(number,
+					askFor.getTimeInMillis(), askFor.getDistance(), points);
+			numberOfInserts = insertRouting.getNumberOfInserts();
+		}
 	}
 
 	@Override
