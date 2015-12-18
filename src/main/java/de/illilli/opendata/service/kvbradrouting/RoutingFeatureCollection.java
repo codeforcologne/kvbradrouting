@@ -1,5 +1,8 @@
 package de.illilli.opendata.service.kvbradrouting;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +35,13 @@ public class RoutingFeatureCollection {
 			}
 			feature.setGeometry(lineString);
 			Map<String, Object> properties = new Hashtable<String, Object>();
-			properties.put("distance", routingDb.getDistance() / 1000);
+			DecimalFormat df = new DecimalFormat("#.000");
+			String distance = df.format(routingDb.getDistance() / 1000);
+			properties.put("distance", distance);
 			properties.put("number", routingDb.getNumber());
-			properties.put("time", routingDb.getTimeinmillis() / 1000);
+			String time = new SimpleDateFormat("mm:ss").format(new Date(
+					routingDb.getTimeinmillis()));
+			properties.put("time", time);
 			feature.setProperties(properties);
 			featureCollection.add(feature);
 		}
