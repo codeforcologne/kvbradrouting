@@ -3,4 +3,5 @@
 # Die fehlenden Einträge müssen ergänzt werden.
 # Danach ist die Datei in config.properties zu kopieren.
 graphhopper.licence.key=<yourkey>
+graphhopper.serviceUrl=https://graphhopper.com/api/1/route
 kvblive.bikesmap.url=http://localhost:8080/kvbradlive/service/bikesmap
