@@ -26,14 +26,18 @@ public class RouteAndInsertToDb implements RouteAndInsert {
 		AskForRouting askFor = new AskForRouting(ghPointList);
 		// schreibe das Ergebnis für jedes Fahrrad als LineString in die
 		// Datenbank
-		List<Double[]> points = askFor.getGeoJsonList();
-		// aber vorher loesche die alten Werte
-		if (askFor.getPointList().getSize() > 1) {
-			// check for number of points to insert; if less than two points an
-			// exception is thrown
-			InsertRouting insertRouting = new InsertRouting(number,
-					askFor.getTimeInMillis(), askFor.getDistance(), points);
-			numberOfInserts = insertRouting.getNumberOfInserts();
+		if (askFor != null && askFor.getGeoJsonList() != null
+				&& askFor.getPointList() != null) {
+			List<Double[]> points = askFor.getGeoJsonList();
+			// aber vorher loesche die alten Werte
+			if (askFor.getPointList().getSize() > 1) {
+				// check for number of points to insert; if less than two points
+				// an
+				// exception is thrown
+				InsertRouting insertRouting = new InsertRouting(number,
+						askFor.getTimeInMillis(), askFor.getDistance(), points);
+				numberOfInserts = insertRouting.getNumberOfInserts();
+			}
 		}
 	}
 

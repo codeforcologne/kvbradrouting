@@ -1,5 +1,6 @@
 package de.illilli.opendata.service.kvbradrouting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -25,8 +26,10 @@ public class AskForRouting {
 	public AskForRouting(List<GHPoint> ghPointList) {
 
 		GraphHopperWeb graphHopper = new GraphHopperWeb();
+		// set different service here
+		graphHopper.load(Config.getProperty("graphhopper.serviceUrl"));
 		// insert your key here
-		graphHopper.setKey(Config.getProperty("graphhopper.licence.key"));
+		// graphHopper.setKey(Config.getProperty("graphhopper.licence.key"));
 		// change timeout, default is 5 seconds
 		graphHopper.getDownloader().setConnectTimeout(10, TimeUnit.SECONDS);
 
@@ -86,7 +89,12 @@ public class AskForRouting {
 	}
 
 	public List<Double[]> getGeoJsonList() {
-		return pointList.toGeoJson();
+		if (pointList != null) {
+			return pointList.toGeoJson();
+		} else {
+			return new ArrayList<Double[]>();
+		}
+
 	}
 
 }
