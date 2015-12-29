@@ -40,9 +40,11 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 			ClassNotFoundException {
 
 		super.numberOfInserts = 0;
+		Integer number = new Integer(-1);
 
 		for (Map.Entry<Integer, List<BikeBo>> entry : bikesMap.entrySet()) {
-			Integer number = entry.getKey();
+
+			number = entry.getKey();
 			List<BikeBo> bikeBoList = entry.getValue();
 			boolean firstRun = true;
 
@@ -50,22 +52,27 @@ public class InsertRoutingCollectorByPair extends InsertRoutingCollector {
 			List<GHPoint> ghPointList = new ArrayList<GHPoint>();
 			for (BikeBo bikeBo : bikeBoList) {
 				if (firstRun) {
+					// nur wenn neue number
+					firstRun = false;
 					ghPointList = new ArrayList<GHPoint>();
 					ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
-					ghPointList.add(ghPoint);
-					firstRun = false;
 				} else {
+					// nimm ghPoint vom vorherigen Lauf
+					ghPointList.add(ghPoint);
+					// hole den naechsten
 					ghPoint = new GHPoint(bikeBo.getLat(), bikeBo.getLng());
 					ghPointList.add(ghPoint);
-					firstRun = true;
 					logger.info("insert [" + number + "]: " + ghPointList);
 					if (bikeBo.getTimestamp().getTime() >= lastrun) {
 						routeAndInsert.run(number, ghPointList);
 						super.numberOfInserts++;
 					}
+					ghPointList = new ArrayList<GHPoint>();
+				}
+				if (bikeBo.getTimestamp().getTime() < lastrun) {
+					break;
 				}
 			}
 		}
 	}
-
 }

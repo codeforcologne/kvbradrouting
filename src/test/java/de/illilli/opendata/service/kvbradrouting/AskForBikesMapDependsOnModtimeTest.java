@@ -42,8 +42,7 @@ public class AskForBikesMapDependsOnModtimeTest {
 	public static void main(String[] args) throws MalformedURLException,
 			IOException {
 		// long lastrun = System.currentTimeMillis() - SIXHOURS;
-		AskForBikes askFor = new AskForBikesMapDependsOnModtime(
-				FROMTHEBEGINNING);
+		AskForBikes askFor = new AskForBikesMapDependsOnModtime(ONEDAY);
 		Map<Integer, List<BikeBo>> bikesMap = askFor.getBikesMap();
 		Gson gson = new Gson();
 		String json = gson.toJson(bikesMap);

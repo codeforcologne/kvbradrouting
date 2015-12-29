@@ -62,18 +62,25 @@ public class InsertRoutingCollectorByPairTest {
 	 * @param args
 	 * @throws MalformedURLException
 	 * @throws IOException
+	 * @throws NamingException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
 	public static void main(String[] args) throws MalformedURLException,
-			IOException {
+			IOException, ClassNotFoundException, SQLException, NamingException {
 		JndiProperties.setUpConnectionForJndi();
 
 		long lastrun = System.currentTimeMillis() - ONEDAY;
 		AskForBikes askForBikes = new AskForBikesMapDependsOnModtime(lastrun);
+		Map<Integer, List<BikeBo>> bikesMap = askForBikes.getBikesMap();
+		InsertRoutingCollector insertRouting = new InsertRoutingCollectorByPair(
+				new RouteAndInsertForTest());
+		insertRouting.routeAndInsert(lastrun, bikesMap);
 
 		Type type = new TypeToken<Map<Integer, List<BikeBo>>>() {
 		}.getType();
 
-		String json = new Gson().toJson(askForBikes.getBikesMap(), type);
+		String json = new Gson().toJson(bikesMap, type);
 		PrintWriter out = new PrintWriter("bikesmap.json");
 		out.println(json);
 		out.close();
