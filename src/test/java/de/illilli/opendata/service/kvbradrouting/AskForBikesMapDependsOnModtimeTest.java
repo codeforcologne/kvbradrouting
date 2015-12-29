@@ -61,7 +61,7 @@ public class AskForBikesMapDependsOnModtimeTest {
 		Gson gson = new Gson();
 		Map<Integer, List<BikeBo>> bikesMap = gson.fromJson(
 				IOUtils.toString(inputStream), type);
-		int expected = 775;
+		int expected = 776;
 		int actual = bikesMap.size();
 		Assert.assertEquals(expected, actual);
 	}
