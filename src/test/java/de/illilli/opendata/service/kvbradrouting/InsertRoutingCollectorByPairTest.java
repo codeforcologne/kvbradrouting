@@ -50,7 +50,7 @@ public class InsertRoutingCollectorByPairTest {
 				new RouteAndInsertForTest());
 		insertRouting.routeAndInsert(lastrun, bikesMap);
 		int actual = insertRouting.getNumberOfInserts();
-		int expected = 1841;
+		int expected = 8356;
 		Assert.assertEquals(expected, actual);
 	}
 
