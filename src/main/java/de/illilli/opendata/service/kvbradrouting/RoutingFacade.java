@@ -69,8 +69,8 @@ public class RoutingFacade implements Facade {
 
 	@Override
 	public String getJson() throws JsonProcessingException {
-		// TODO Auto-generated method stub
-		return "Anzahl berechneter/ eingefügter Routings";
+		return "Anzahl berechneter/ eingefügter Routings: "
+				+ this.insertOfLastRun.getNumberOfInserts();
 	}
 
 }
