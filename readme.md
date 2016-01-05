@@ -18,7 +18,7 @@ Das Routing wird über den REST-EndPoint '/kvbrouting/service/insert' ausgelöst
 
 ## Routing Engine
 
-Zur Bestimmung des Routing wird die Software graphhopper verwendet. Hier wird der Service von Graphhopper selbst verwendet. Daher ist es notwendig einen Lizenzschlüssel zu beantragen. Dieser wird in der Datei config.properties dem Schlüssel graphhopper.licence.key zugewiesen. In Abhängigkeit von der Lizenz ist es möglich, dass nur 500 Routing-Abfragen pro Tag zugelassen sind. Dies bedeutet, dass ggf. nicht für alle Fahrräder das Routing innerhalb eines Tages bestimmt werden kann.
+Zur Bestimmung des Routing wird die Software [graphhopper](https://graphhopper.com/) verwendet. Hier wird der Service von Graphhopper selbst verwendet. Daher ist es notwendig einen Lizenzschlüssel zu beantragen. Dieser wird in der Datei config.properties dem Schlüssel graphhopper.licence.key zugewiesen. In Abhängigkeit von der Lizenz ist es möglich, dass nur 500 Routing-Abfragen pro Tag zugelassen sind. Dies bedeutet, dass ggf. nicht für alle Fahrräder das Routing innerhalb eines Tages bestimmt werden kann.
 
 ## Database
 
