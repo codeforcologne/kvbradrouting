@@ -7,6 +7,7 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,9 +34,8 @@ public class Service {
 
 	/**
 	 * <p>
-	 * Beispiel: <a
-	 * href="http://localhost:8080/kvbrouting/service/insert">/kvbrouting
-	 * /service/insert</a>
+	 * Beispiel:
+	 * <code>curl -X PUT http://localhost:8080/kvbradrouting/service/put</code>
 	 * </p>
 	 * 
 	 * @return
@@ -46,10 +46,10 @@ public class Service {
 	 * @throws NamingException
 	 * @throws ClassNotFoundException
 	 */
-	@GET
+	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/insert")
-	public String insertFahrraederRouting() throws JsonParseException,
+	@Path("/put")
+	public String putKvbradRouting() throws JsonParseException,
 			JsonMappingException, IOException, SQLException, NamingException,
 			ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
