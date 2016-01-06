@@ -49,9 +49,8 @@ public class Service {
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/put")
-	public String putKvbradRouting() throws JsonParseException,
-			JsonMappingException, IOException, SQLException, NamingException,
-			ClassNotFoundException {
+	public String putKvbradRouting() throws JsonParseException, JsonMappingException, IOException, SQLException,
+			NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new RoutingFacade();
@@ -74,8 +73,8 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json")
-	public String getJson() throws JsonParseException, JsonMappingException,
-			IOException, SQLException, NamingException {
+	public String getJson()
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new JsonFacade();
@@ -84,7 +83,31 @@ public class Service {
 
 	/**
 	 * <p>
-	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/json/21617">
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/json/0">
+	 * /kvbradrouting/service/json</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/json/{modtime}")
+	public String getJson(@PathParam("modtime") Long modtime)
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new JsonFacade();
+		return facade.getJson();
+	}
+
+	/**
+	 * <p>
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/bike/21617">
 	 * /kvbradrouting/service/json/21617</a>
 	 * </p>
 	 * 
@@ -99,10 +122,9 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/json/{number}")
+	@Path("/bike/{number}")
 	public String getJson(@PathParam("number") Integer number)
-			throws JsonParseException, JsonMappingException, IOException,
-			SQLException, NamingException {
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new JsonFacade(number);
@@ -112,8 +134,8 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson")
-	public String getGeojson() throws JsonParseException, JsonMappingException,
-			IOException, SQLException, NamingException {
+	public String getGeojson()
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new GeoJsonFacade();
@@ -122,8 +144,8 @@ public class Service {
 
 	/**
 	 * <p>
-	 * Bsp.: <a
-	 * href="http://localhost:8080/kvbradrouting/service/geojson/21617">
+	 * Bsp.:
+	 * <a href="http://localhost:8080/kvbradrouting/service/geojson/21617">
 	 * /kvbradrouting/service/geojson/21617</a>
 	 * </p>
 	 * 
@@ -139,8 +161,7 @@ public class Service {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson/{number}")
 	public String getGeojson(@PathParam("number") Integer number)
-			throws JsonParseException, JsonMappingException, IOException,
-			SQLException, NamingException {
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new GeoJsonFacade(number);

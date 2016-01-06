@@ -16,15 +16,16 @@ public class JsonFacade implements Facade {
 
 	private List<RoutingBo> routingList;
 
-	public JsonFacade(Integer number) throws SQLException, NamingException,
-			IOException {
-		routingList = new RoutingCollection(new SelectRouting(number))
-				.getRoutingList();
+	public JsonFacade(Integer number) throws SQLException, NamingException, IOException {
+		routingList = new RoutingCollection(new SelectRouting(number)).getRoutingList();
 	}
 
 	public JsonFacade() throws SQLException, NamingException, IOException {
-		routingList = new RoutingCollection(new SelectRouting())
-				.getRoutingList();
+		routingList = new RoutingCollection(new SelectRouting()).getRoutingList();
+	}
+
+	public JsonFacade(Long modtime) throws SQLException, NamingException, IOException {
+		routingList = new RoutingCollection(new SelectRouting()).getRoutingList();
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package de.illilli.opendata.service.kvbradrouting.jdbc;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.naming.NamingException;
 
@@ -15,8 +16,13 @@ public class SelectRouting extends Select<RoutingDao> {
 		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);
 	}
 
-	public SelectRouting(Integer number) throws SQLException, NamingException,
-			IOException {
+	public SelectRouting(Long modtime) throws SQLException, NamingException, IOException {
+		queryString = "/selectRoutingByModtime.sql";
+		Object[] params = new Object[] { new Timestamp(modtime) };
+		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);
+	}
+
+	public SelectRouting(Integer number) throws SQLException, NamingException, IOException {
 		queryString = "/selectRoutingByNumber.sql";
 		Object[] params = new Object[] { number };
 		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);

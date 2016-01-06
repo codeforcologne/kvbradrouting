@@ -6,11 +6,11 @@ Dieser Service liest über kvbradlive die bereits gespeicherten Daten aus, grupp
 
 ### Json Service
 
-Es ist möglich die durch die Routing Funktion erstellten Daten im Json-Format über den REST-Endpoint /kvbrouting/service/json abzufragen. Wenn nur die Information eines Fahrrades abgefragt werden soll, muss der die Nummer dem Pfad hinzugfügt werden: /kvbrouting/service/json/{number}
+Es ist möglich die durch die Routing Funktion erstellten Daten im Json-Format über den REST-Endpoint /kvbrouting/service/json abzufragen. Wenn nur die bis zu einem bestimmten Zeitpunkt verfügbaren Informationen abgefragt werden sollen, kann über eine Timestamp in Form eines long die Ausgabe eingeschränkt werden:/kvbrouting/service/json/12345667. Wenn nur die Information eines Fahrrades abgefragt werden soll, muss der die Nummer dem Pfad hinzugfügt werden: /kvbrouting/service/bike/{number}
 
 ### Insert Service
 
-Das Routing wird über den REST-EndPoint '/kvbrouting/service/insert' ausgelöst. Durch seinen Aufruf, werden zunächst alle Fahrräder bestimmt, deren Positionen sich seit dem letzten Durchgang verändert haben. Danach wird auf alle gespeicherten Standorte das Routing durchgeführt. Die ermittelten Werte werden als LINESTRING in der Datenbank gespeichert. Wenn dieser Service wiederholt ausgeführt werden soll, sollte dies z.B. mit Hilfe des cron erfolgten.
+Das Routing wird über den REST-EndPoint '/kvbrouting/service/put' ausgelöst. Durch seinen Aufruf, werden zunächst alle Fahrräder bestimmt, deren Positionen sich seit dem letzten Durchgang verändert haben. Danach wird auf alle gespeicherten Standorte das Routing durchgeführt. Die ermittelten Werte werden als LINESTRING in der Datenbank gespeichert. Wenn dieser Service wiederholt ausgeführt werden soll, sollte dies z.B. mit Hilfe des cron erfolgten.
 
 ### GeoJson Service
 
