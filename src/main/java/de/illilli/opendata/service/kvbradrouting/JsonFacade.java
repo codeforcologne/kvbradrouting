@@ -25,7 +25,7 @@ public class JsonFacade implements Facade {
 	}
 
 	public JsonFacade(Long modtime) throws SQLException, NamingException, IOException {
-		routingList = new RoutingCollection(new SelectRouting()).getRoutingList();
+		routingList = new RoutingCollection(new SelectRouting(modtime)).getRoutingList();
 	}
 
 	@Override

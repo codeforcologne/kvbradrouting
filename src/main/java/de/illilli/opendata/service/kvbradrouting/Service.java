@@ -101,7 +101,7 @@ public class Service {
 			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		Facade facade = new JsonFacade();
+		Facade facade = new JsonFacade(modtime);
 		return facade.getJson();
 	}
 
