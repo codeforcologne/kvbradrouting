@@ -27,6 +27,7 @@ public class AskForRouting {
 
 		GraphHopperWeb graphHopper = new GraphHopperWeb();
 		// set different service here
+		logger.info("path to graphhopper service: '" + Config.getProperty("graphhopper.serviceUrl") + "'");
 		graphHopper.load(Config.getProperty("graphhopper.serviceUrl"));
 		// insert your key here
 		// graphHopper.setKey(Config.getProperty("graphhopper.licence.key"));
@@ -67,13 +68,13 @@ public class AskForRouting {
 		// elevation)
 		pointList = ghResponse.getPoints();
 		// logger.debug(pointList);
-		logger.debug(pointList.toGeoJson());
+		logger.debug("number of points: " + pointList.getSize());
 		// distance of the full path, in meter
 		distance = ghResponse.getDistance();
-		logger.debug(distance);
+		logger.debug("distance: " + distance + " m");
 		// time of the full path, in milliseconds
 		timeInMillis = ghResponse.getTime();
-		logger.debug(timeInMillis);
+		logger.debug("time of the full path: " + timeInMillis + " (in milliseconds)");
 	}
 
 	public PointList getPointList() {
