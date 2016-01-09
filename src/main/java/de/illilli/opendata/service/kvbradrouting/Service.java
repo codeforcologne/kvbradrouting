@@ -131,6 +131,19 @@ public class Service {
 		return facade.getJson();
 	}
 
+	/**
+	 * <p>
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/geojson">
+	 * /kvbradrouting/service/geojson</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson")
@@ -144,9 +157,34 @@ public class Service {
 
 	/**
 	 * <p>
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/geojson/1">
+	 * /kvbradrouting/service/geojson/&lt;days&gt;</a>
+	 * </p>
+	 * 
+	 * @param days
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/geojson/{days}")
+	public String getGeojson(@PathParam("days") short days)
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new GeoJsonFacade(days);
+		return facade.getJson();
+	}
+
+	/**
+	 * <p>
 	 * Bsp.:
-	 * <a href="http://localhost:8080/kvbradrouting/service/geojson/21617">
-	 * /kvbradrouting/service/geojson/21617</a>
+	 * <a href="http://localhost:8080/kvbradrouting/service/geojson/bike/21617">
+	 * /kvbradrouting/service/geojson/bike/&lt;number&gt;</a>
 	 * </p>
 	 * 
 	 * @param number
@@ -159,7 +197,7 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/geojson/{number}")
+	@Path("/geojson/bike/{number}")
 	public String getGeojson(@PathParam("number") Integer number)
 			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		request.setCharacterEncoding("UTF-8");

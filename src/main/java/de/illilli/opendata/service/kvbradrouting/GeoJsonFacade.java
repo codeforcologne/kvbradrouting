@@ -15,12 +15,17 @@ import de.illilli.opendata.service.kvbradrouting.jdbc.SelectRouting;
 
 public class GeoJsonFacade implements Facade {
 
+	static final int ONEDAY = 1000 * 60 * 60 * 24;
+
 	private FeatureCollection featureCollection;
 
-	public GeoJsonFacade(Integer number) throws SQLException, NamingException,
-			IOException {
-		featureCollection = new RoutingFeatureCollection(new SelectRouting(
-				number)).getFeatureCollection();
+	public GeoJsonFacade(Integer number) throws SQLException, NamingException, IOException {
+		featureCollection = new RoutingFeatureCollection(new SelectRouting(number)).getFeatureCollection();
+	}
+
+	public GeoJsonFacade(short days) throws SQLException, NamingException, IOException {
+		long time = System.currentTimeMillis() - (days * GeoJsonFacade.ONEDAY);
+		featureCollection = new RoutingFeatureCollection(new SelectRouting(time)).getFeatureCollection();
 	}
 
 	/**
@@ -32,8 +37,7 @@ public class GeoJsonFacade implements Facade {
 	 * @throws SQLException
 	 */
 	public GeoJsonFacade() throws SQLException, NamingException, IOException {
-		featureCollection = new RoutingFeatureCollection(new SelectRouting())
-				.getFeatureCollection();
+		featureCollection = new RoutingFeatureCollection(new SelectRouting()).getFeatureCollection();
 	}
 
 	@Override
