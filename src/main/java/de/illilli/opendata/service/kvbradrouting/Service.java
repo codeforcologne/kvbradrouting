@@ -82,6 +82,38 @@ public class Service {
 	}
 
 	/**
+	 * Dieser Service liefert für jedes erfasste Rad die gesammelten Werte zu
+	 * <ul>
+	 * <li>zurückgelegter Strecke</li>
+	 * <li>verwendete Zeit</li>
+	 * <li>Anzahl der Werte</li>
+	 * </ul>
+	 * 
+	 * <p>
+	 * Beispiel:
+	 * <a href="http://localhost:8080/kvbradrouting/service/aggregated">
+	 * /kvbradrouting/service/aggregated</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/aggregated")
+	public String getAggregated()
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		Facade facade = new AggregatedJsonFacade();
+		return facade.getJson();
+	}
+
+	/**
 	 * <p>
 	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/json/0">
 	 * /kvbradrouting/service/json</a>
