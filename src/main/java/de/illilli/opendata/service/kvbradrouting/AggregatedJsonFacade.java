@@ -21,7 +21,7 @@ public class AggregatedJsonFacade implements Facade {
 	private static final Logger logger = Logger.getLogger(AggregatedJsonFacade.class);
 	private List<AggregatedBo> list = new ArrayList<>();
 
-	public AggregatedJsonFacade() throws SQLException, NamingException, IOException {
+	public AggregatedJsonFacade() throws SQLException, NamingException, IOException, ClassNotFoundException {
 		Select<AggregatedBo> select = new SelectForAllbikesAggregated();
 		list = select.getDbObjectList();
 		logger.info("SelectForAllbikesAggregated: '" + list.size() + "' items found");

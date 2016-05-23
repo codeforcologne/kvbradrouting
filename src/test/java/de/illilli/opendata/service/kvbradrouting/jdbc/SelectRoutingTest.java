@@ -16,8 +16,7 @@ public class SelectRoutingTest {
 	public void setUp() throws Exception {
 	}
 
-	public static void main(String[] args) throws IOException, SQLException,
-			NamingException {
+	public static void main(String[] args) throws IOException, SQLException, NamingException, ClassNotFoundException {
 		JndiProperties.setUpConnectionForJndi();
 		Select<RoutingDao> select = new SelectRouting();
 		List<RoutingDao> routingList = select.getDbObjectList();

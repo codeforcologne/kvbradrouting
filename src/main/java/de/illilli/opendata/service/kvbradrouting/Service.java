@@ -69,12 +69,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json")
-	public String getJson()
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getJson() throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException,
+			ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new JsonFacade();
@@ -101,12 +102,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/aggregated")
-	public String getAggregated()
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getAggregated() throws JsonParseException, JsonMappingException, IOException, SQLException,
+			NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new AggregatedJsonFacade();
@@ -125,12 +127,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/json/{modtime}")
-	public String getJson(@PathParam("modtime") Long modtime)
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getJson(@PathParam("modtime") Long modtime) throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new JsonFacade(modtime);
@@ -151,12 +154,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/bike/{number}")
-	public String getJson(@PathParam("number") Integer number)
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getJson(@PathParam("number") Integer number) throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new JsonFacade(number);
@@ -175,12 +179,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson")
-	public String getGeojson()
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getGeojson() throws JsonParseException, JsonMappingException, IOException, SQLException,
+			NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new GeoJsonFacade();
@@ -200,12 +205,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson/{days}")
-	public String getGeojson(@PathParam("days") short days)
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getGeojson(@PathParam("days") short days) throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new GeoJsonFacade(days);
@@ -226,12 +232,13 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/geojson/bike/{number}")
-	public String getGeojson(@PathParam("number") Integer number)
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String getGeojson(@PathParam("number") Integer number) throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException, ClassNotFoundException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Facade facade = new GeoJsonFacade(number);

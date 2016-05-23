@@ -11,7 +11,7 @@ import de.illilli.opendata.service.kvbradrouting.AggregatedBo;
 
 public class SelectForAllbikesAggregated extends Select<AggregatedBo> {
 
-	public SelectForAllbikesAggregated() throws SQLException, NamingException, IOException {
+	public SelectForAllbikesAggregated() throws SQLException, NamingException, IOException, ClassNotFoundException {
 		queryString = "/selectForAllbikesAggregated.sql";
 		Object[] params = new Object[0];
 		runSelect(new BeanListHandler<AggregatedBo>(AggregatedBo.class), params);

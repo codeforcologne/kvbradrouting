@@ -17,7 +17,7 @@ public class SelectForAllbikesAggregatedTest {
 	public void setUp() throws Exception {
 	}
 
-	public static void main(String[] args) throws IOException, SQLException, NamingException {
+	public static void main(String[] args) throws IOException, SQLException, NamingException, ClassNotFoundException {
 		JndiProperties.setUpConnectionForJndi();
 		Select<AggregatedBo> select = new SelectForAllbikesAggregated();
 		List<AggregatedBo> list = select.getDbObjectList();

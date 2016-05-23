@@ -19,11 +19,11 @@ public class GeoJsonFacade implements Facade {
 
 	private FeatureCollection featureCollection;
 
-	public GeoJsonFacade(Integer number) throws SQLException, NamingException, IOException {
+	public GeoJsonFacade(Integer number) throws SQLException, NamingException, IOException, ClassNotFoundException {
 		featureCollection = new RoutingFeatureCollection(new SelectRouting(number)).getFeatureCollection();
 	}
 
-	public GeoJsonFacade(short days) throws SQLException, NamingException, IOException {
+	public GeoJsonFacade(short days) throws SQLException, NamingException, IOException, ClassNotFoundException {
 		long time = System.currentTimeMillis() - (days * GeoJsonFacade.ONEDAY);
 		featureCollection = new RoutingFeatureCollection(new SelectRouting(time)).getFeatureCollection();
 	}
@@ -35,8 +35,9 @@ public class GeoJsonFacade implements Facade {
 	 * @throws IOException
 	 * @throws NamingException
 	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public GeoJsonFacade() throws SQLException, NamingException, IOException {
+	public GeoJsonFacade() throws SQLException, NamingException, IOException, ClassNotFoundException {
 		featureCollection = new RoutingFeatureCollection(new SelectRouting()).getFeatureCollection();
 	}
 

@@ -10,19 +10,19 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 public class SelectRouting extends Select<RoutingDao> {
 
-	public SelectRouting() throws SQLException, NamingException, IOException {
+	public SelectRouting() throws SQLException, NamingException, IOException, ClassNotFoundException {
 		queryString = "/selectRouting.sql";
 		Object[] params = new Object[0];
 		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);
 	}
 
-	public SelectRouting(Long modtime) throws SQLException, NamingException, IOException {
+	public SelectRouting(Long modtime) throws SQLException, NamingException, IOException, ClassNotFoundException {
 		queryString = "/selectRoutingByModtime.sql";
 		Object[] params = new Object[] { new Timestamp(modtime) };
 		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);
 	}
 
-	public SelectRouting(Integer number) throws SQLException, NamingException, IOException {
+	public SelectRouting(Integer number) throws SQLException, NamingException, IOException, ClassNotFoundException {
 		queryString = "/selectRoutingByNumber.sql";
 		Object[] params = new Object[] { number };
 		runSelect(new BeanListHandler<RoutingDao>(RoutingDao.class), params);

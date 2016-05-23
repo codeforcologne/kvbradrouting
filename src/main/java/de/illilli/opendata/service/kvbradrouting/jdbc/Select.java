@@ -22,15 +22,15 @@ public abstract class Select<T> {
 	private List<T> dbObjectList = new ArrayList<T>();
 
 	void runSelect(BeanListHandler<T> beanListHandler, Object... params)
-			throws SQLException, NamingException, IOException {
+			throws SQLException, NamingException, IOException, ClassNotFoundException {
 
 		Connection conn = ConnectionFactory.getConnection();
-		InputStream inputStream = this.getClass().getResourceAsStream(
-				queryString);
+		InputStream inputStream = this.getClass().getResourceAsStream(queryString);
 		String sql = IOUtils.toString(inputStream);
 
-		DbUtilsBeanListHandler<T> rsh = new DbUtilsBeanListHandler<T>(conn,
-				beanListHandler, sql, params);
+		((org.postgresql.PGConnection) conn).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
+
+		DbUtilsBeanListHandler<T> rsh = new DbUtilsBeanListHandler<T>(conn, beanListHandler, sql, params);
 		dbObjectList = rsh.getList();
 
 		conn.close();

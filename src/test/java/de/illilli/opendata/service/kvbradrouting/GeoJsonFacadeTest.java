@@ -15,8 +15,7 @@ public class GeoJsonFacadeTest {
 	public void setUp() throws Exception {
 	}
 
-	public static void main(String[] args) throws IOException, SQLException,
-			NamingException {
+	public static void main(String[] args) throws IOException, SQLException, NamingException, ClassNotFoundException {
 		JndiProperties.setUpConnectionForJndi();
 		Facade facade = new GeoJsonFacade();
 		String json = facade.getJson();
