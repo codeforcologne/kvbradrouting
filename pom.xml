@@ -22,7 +22,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>install</phase>
 						<!-- Kopiere initial lokale Properties aus Template -->
 						<configuration>
 							<target>
