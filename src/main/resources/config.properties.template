@@ -1,7 +1,11 @@
-# in dieser Datei wird die Anwendung konfiguriert. 
-# Sie ist aber nur eine Vorlage. 
-# Die fehlenden Einträge müssen ergänzt werden.
-# Danach ist die Datei in config.properties zu kopieren.
+# Diese Datei ist eine Vorlage zur Konfiguration des Services. Die eigentliche Konfiguration
+# wird in config.properties vorgenommen. Durch ausführen von mvn package wird diese Datei 
+# in 'config.properties' kopiert. Somit steht sie bei lokaler Nutzung direkt zur Verfügung.
+
+# Der licence Key ist nur bei Verwendung des original Graphhopper Service notwendig
 graphhopper.licence.key=<yourkey>
-graphhopper.serviceUrl=https://graphhopper.com/api/1/route
+
+#graphhopper.serviceUrl=https://graphhopper.com/api/1/route
+graphhopper.serviceUrl=http://localhost:8989/route
+
 kvblive.bikesmap.url=http://localhost:8080/kvbradlive/service/bikesmap
