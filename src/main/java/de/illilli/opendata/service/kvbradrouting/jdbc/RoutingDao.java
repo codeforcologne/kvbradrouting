@@ -9,8 +9,8 @@ import org.postgis.PGgeometry;
  * number integer NOT NULL, 
  * timeinmillis bigint, 
  * distance double precision,
- * modtime timestamp DEFAULT current_timestamp ); SELECT AddGeometryColumn
- * geom LINESTRING
+ * modtime timestamp DEFAULT current_timestamp ); 
+ * SELECT AddGeometryColumn geom LINESTRING
  * </pre>
  *
  */
@@ -64,9 +64,8 @@ public class RoutingDao {
 
 	@Override
 	public String toString() {
-		return "RoutingDb [number=" + number + ", timeinmillis=" + timeinmillis
-				+ ", distance=" + distance + ", modtime=" + modtime + ", geom="
-				+ geom + "]";
+		return "RoutingDb [number=" + number + ", timeinmillis=" + timeinmillis + ", distance=" + distance
+				+ ", modtime=" + modtime + ", geom=" + geom + "]";
 	}
 
 	@Override
@@ -92,8 +91,7 @@ public class RoutingDao {
 		if (getClass() != obj.getClass())
 			return false;
 		RoutingDao other = (RoutingDao) obj;
-		if (Double.doubleToLongBits(distance) != Double
-				.doubleToLongBits(other.distance))
+		if (Double.doubleToLongBits(distance) != Double.doubleToLongBits(other.distance))
 			return false;
 		if (geom == null) {
 			if (other.geom != null)

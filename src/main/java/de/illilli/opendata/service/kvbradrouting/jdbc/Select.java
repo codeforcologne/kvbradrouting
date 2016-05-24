@@ -28,8 +28,6 @@ public abstract class Select<T> {
 		InputStream inputStream = this.getClass().getResourceAsStream(queryString);
 		String sql = IOUtils.toString(inputStream);
 
-		((org.postgresql.PGConnection) conn).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
-
 		DbUtilsBeanListHandler<T> rsh = new DbUtilsBeanListHandler<T>(conn, beanListHandler, sql, params);
 		dbObjectList = rsh.getList();
 
