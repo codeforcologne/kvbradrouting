@@ -141,8 +141,10 @@ public class Service {
 	}
 
 	/**
+	 * This services returns the requested routing information in json
+	 * representation of 'List&lt;RoutingBo&gt;' Object.
 	 * <p>
-	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/bike/21617">
+	 * Bsp.: <a href="http://localhost:8080/kvbradrouting/service/bike/21004">
 	 * /kvbradrouting/service/json/21617</a>
 	 * </p>
 	 * 

@@ -8,6 +8,16 @@ import javax.naming.NamingException;
 
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+/**
+ * This class retrieves routing information from database. There are three
+ * possibilities:
+ * <ol>
+ * <li>get all routings available in Database</li>
+ * <li>get routings dependend from modtime; just get newer ones</li>
+ * <li>get routings dependend from number</li>
+ * </ol>
+ *
+ */
 public class SelectRouting extends Select<RoutingDao> {
 
 	public SelectRouting() throws SQLException, NamingException, IOException, ClassNotFoundException {

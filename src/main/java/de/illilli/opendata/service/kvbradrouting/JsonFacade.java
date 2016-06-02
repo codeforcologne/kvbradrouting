@@ -12,6 +12,15 @@ import com.google.gson.Gson;
 import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.kvbradrouting.jdbc.SelectRouting;
 
+/**
+ * This Facade returns RoutingCollections with different selections:
+ * <ol>
+ * <li>get all routings available in Database</li>
+ * <li>get routings dependend from modtime; just get newer ones</li>
+ * <li>get routings dependend from number</li>
+ * </ol>
+ *
+ */
 public class JsonFacade implements Facade {
 
 	private List<RoutingBo> routingList;
