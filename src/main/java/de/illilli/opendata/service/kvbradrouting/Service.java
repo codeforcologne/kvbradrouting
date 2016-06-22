@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -246,4 +247,19 @@ public class Service {
 		Facade facade = new GeoJsonFacade(number);
 		return facade.getJson();
 	}
+
+	/**
+	 * curl -X DELETE http://<server>/kvbradrouting/service/delete
+	 * 
+	 * @throws IOException
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
+	@DELETE
+	@Path("/delete")
+	public void deleteOldData() {
+		logger.info("deleteOldData");
+		new DeleteFacade();
+	}
+
 }
